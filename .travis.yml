@@ -2,3 +2,11 @@ language: java
 jdk: openjdk11
 after_deploy:
         echo "Done deploying"
+addons:
+  sonarcloud:
+    organization: "crone123"
+    token:
+        secure: $TOKEN
+script:
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - mvn clean verify sonar:sonar -Pcoverage sonar:sonar -Dsonar.login=$TOKEN -Dsonar.projectKey=crone123_vvcl-tp
